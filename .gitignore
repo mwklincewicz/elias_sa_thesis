@@ -1,0 +1,59 @@
+# Local development environments and caches
+.venv/
+.vendor/
+.codex_tools/
+.hf-cache/
+.pytest-tmp/
+.pytest_cache/
+pytest-cache-files-*/
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+
+# Keep thesis workspace task files public even though root .vscode is local-only
+!thesis_findings_vscode/**/.vscode/
+!thesis_findings_vscode/**/.vscode/tasks.json
+
+# Environment files and local packages
+.env
+.env.*
+*.zip
+
+# Raw, private, or access-controlled data
+*.xlsx
+data/*
+!data/README.md
+test data/*.csv
+test data/*.xlsx
+test data/stories_formatting_summary.txt
+!test data/README.md
+thesis_findings_vscode/**/data/*
+!thesis_findings_vscode/**/data/README.md
+!thesis_findings_vscode/wordpress_findings_codebase/data/selected_sites.txt
+thesis_findings_vscode/**/test data/*.csv
+thesis_findings_vscode/**/test data/*.xlsx
+thesis_findings_vscode/**/test data/stories_formatting_summary.txt
+!thesis_findings_vscode/**/test data/README.md
+
+# Generated outputs, model artifacts, and full public-text scrape tables
+output/
+**/output/
+**/test data/output/
+*.safetensors
+*.bin
+*.pt
+*.pth
+public_reflection_predictions.*
+public_reflection_input_table.csv
+
+# Temporary review/export folders
+_review/
+overleaf_results_package_*/
+overleaf_update_work_*/
+professor_feedback_work_*/
+thesis_guideline_check_*/
+thesis_merge_work_*/
+
+.DS_Store
+Thumbs.db

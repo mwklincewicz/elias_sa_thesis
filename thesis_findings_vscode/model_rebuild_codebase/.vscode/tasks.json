@@ -1,0 +1,101 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Models: list tasks",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py list",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: recommended order",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py recommended-order",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: prepare data",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py prepare-data",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: BERT baseline",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py bert-baseline",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: BERT baseline figures",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py bert-baseline-figures",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: BERT threshold/cardinality",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py bert-threshold-cardinality",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: BERT Optuna",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py bert-optuna",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: BERT Optuna comparison",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py bert-optuna-comparison",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: Stories external BERT",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py stories-external-bert",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: untrained BERT",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py untrained-bert",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: untrained BERT comparison",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py untrained-bert-comparison",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: Gemma Lemotif",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py gemma-lemotif",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: Gemma Stories sentiment",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py gemma-stories-sentiment",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Models: Gemma Stories figures",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_models.py gemma-stories-figures",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+pandas
+numpy
+matplotlib
+seaborn
+networkx
+scikit-learn
+torch
+transformers
+accelerate
+sentencepiece
+protobuf
+peft
+datasets
+bitsandbytes
+timm
+torchvision
+optuna

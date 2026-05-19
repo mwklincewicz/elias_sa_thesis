@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "Primary Findings",
+      "path": "primary_findings_codebase"
+    },
+    {
+      "name": "Secondary Findings",
+      "path": "secondary_findings_codebase"
+    },
+    {
+      "name": "Model Rebuilds",
+      "path": "model_rebuild_codebase"
+    },
+    {
+      "name": "WordPress Findings",
+      "path": "wordpress_findings_codebase"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "..\\.venv\\Scripts\\python.exe"
+  }
+}

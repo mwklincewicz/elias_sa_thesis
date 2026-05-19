@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Secondary Findings: run all",
+      "type": "shell",
+      "command": "..\\..\\.venv\\Scripts\\python.exe run_secondary_findings.py",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+\markboth{right}{\spacedlowsmallcaps{Appendix}}
+
+\section*{Appendix A: Dataset and Exploratory Figures}
+\label{app:dataset-eda}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig01_lemotif_word_count_distribution.png}
+    \caption{Lemotif word count distribution.}
+    \label{fig:app-lemotif-word-count}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig02_lemotif_topic_prevalence.png}
+    \caption{Lemotif topic prevalence.}
+    \label{fig:app-lemotif-topic-prevalence}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig03_lemotif_topic_emotion_heatmap.png}
+    \caption{Lemotif topic-emotion heatmap.}
+    \label{fig:app-lemotif-topic-emotion}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig04_lemotif_emotion_cooccurrence_network.png}
+    \caption{Lemotif emotion co-occurrence network.}
+    \label{fig:app-lemotif-emotion-cooccurrence}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig05_grouped_emotion_prevalence_density.png}
+    \caption{Grouped emotion prevalence and label density.}
+    \label{fig:app-grouped-emotion-prevalence}
+\end{figure}
+
+\section*{Appendix B: Model Variant and Bootstrap Diagnostics}
+\label{app:model-diagnostics}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig06_fixed_inference_overall_metrics.png}
+    \caption{Overall metric comparison for baseline and fixed-inference BERT.}
+    \label{fig:app-fixed-overall}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig07_bootstrap_metric_ci.png}
+    \caption{Bootstrap confidence intervals for selected model metrics.}
+    \label{fig:app-bootstrap-metric-ci}
+\end{figure}
+
+\section*{Appendix C: Error Analysis, Calibration, and Interpretability}
+\label{app:error-interpretability}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig08_rare_label_error_rate.png}
+    \caption{Rare-label error rates for the fixed-inference BERT diagnostics.}
+    \label{fig:app-rare-label-error-rate}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig09_multilabel_error_flow_heatmap.png}
+    \caption{Multi-label error-flow heatmap.}
+    \label{fig:app-multilabel-error-flow}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig10_threshold_sensitivity_curves.png}
+    \caption{Threshold sensitivity curves for the BERT inference diagnostics.}
+    \label{fig:app-threshold-sensitivity}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig11_feature_ablation_overall_metrics.png}
+    \caption{Feature-ablation diagnostic metrics.}
+    \label{fig:app-feature-ablation}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig12_lime_representative_panel.png}
+    \caption{Representative LIME explanations for selected BERT predictions.}
+    \label{fig:app-lime-panel}
+\end{figure}
+
+\section*{Appendix D: WordPress Descriptive Inference}
+\label{app:wordpress-descriptive}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig13_wordpress_emotion_prevalence.png}
+    \caption{Inferred emotion prevalence in the public WordPress journal corpus. This figure is descriptive because the corpus is not gold-labeled.}
+    \label{fig:app-wordpress-emotion-prevalence}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig14_wordpress_emotion_correlation_matrix.png}
+    \caption{Inferred emotion correlation matrix for the public WordPress journal corpus.}
+    \label{fig:app-wordpress-emotion-correlation}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/appendix/app_fig15_wordpress_emotion_cooccurrence_network.png}
+    \caption{Inferred emotion co-occurrence network for the public WordPress journal corpus.}
+    \label{fig:app-wordpress-emotion-cooccurrence}
+\end{figure}

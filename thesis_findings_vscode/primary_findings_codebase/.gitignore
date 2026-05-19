@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+output/**/model/
+test data/output/**/model/
+output/**/adapter/
+test data/output/**/adapter/

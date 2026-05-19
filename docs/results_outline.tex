@@ -1,0 +1,249 @@
+\section{Results}
+\label{sec:results}
+
+% Drafting note:
+% This Results outline follows the verified-only artifact path. Keep WordPress
+% claims descriptive because the WordPress corpus has no gold Lemotif labels.
+% Unsupported planned analyses such as SHAP, longitudinal modeling, weak-label
+% training, and inter-annotator reliability should be moved to Methods revisions,
+% limitations, or future work unless new artifacts are added.
+
+\subsection{Results Overview}
+\label{subs:results-overview}
+
+\begin{itemize}
+    \item This chapter reports the completed evaluation pipeline in four steps: dataset distribution analysis, in-domain Lemotif model evaluation, external Stories evaluation, and descriptive WordPress inference.
+    \item RQ1 is addressed through the Lemotif held-out test and the human-labeled Stories external test.
+    \item RQ2 is addressed through public WordPress journal inference, but only descriptively. Because the WordPress corpus is not human-labeled in the Lemotif taxonomy, this section cannot report WordPress accuracy, $F_1$, or formal bias metrics.
+    \item The central narrative is that BERT learns broad affective structure and derived sentiment more reliably than exact 18-label emotion sets, while Stories and WordPress expose domain-shift limitations.
+\end{itemize}
+
+\subsection{Dataset and Label Distribution}
+\label{subs:dataset-label-distribution}
+
+\begin{itemize}
+    \item Begin by explaining that multi-label emotion classification must be interpreted in relation to label prevalence because rare labels strongly affect macro-$F_1$ and per-label results.
+    \item Report the Lemotif sample size: 1,473 cleaned reflections.
+    \item Report the Lemotif derived sentiment distribution: positive 81.7\% ($n = 1{,}204$), negative 14.7\% ($n = 217$), and neutral 3.5\% ($n = 52$).
+    \item Interpret the positive skew using the Pollyanna hypothesis/principle: evaluatively positive language tends to occur more frequently and diversely than evaluatively negative language in ordinary communication \parencite{boucher1969pollyanna,matlin1978pollyanna}.
+    \item Add thesis-specific context: the Lemotif prompt asked participants to describe salient aspects of the previous day, which plausibly elicits ordinary-life positive reflection rather than clinical distress narratives.
+    \item Note an additional possible skew: crowdsourced short reflections may favor socially acceptable and easily narratable events, while rare negative labels such as Jealous, Afraid, Disgusted, Ashamed, and Awkward occur sparsely.
+    \item Compare Stories as a harder external test: positive 65.8\% ($n = 75$), negative 22.8\% ($n = 26$), and neutral 11.4\% ($n = 13$).
+    \item End this subsection by previewing that high derived-sentiment performance on Lemotif should not be assumed to transfer directly to Stories.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig01_lemotif_emotion_prevalence.png}
+    \caption{Emotion label prevalence in the Lemotif dataset. The distribution shows strong positive-affect dominance, which is relevant for interpreting macro-$F_1$ and rare-label performance.}
+    \label{fig:lemotif-emotion-prevalence}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig02_lemotif_stories_distribution_shift.png}
+    \caption{Emotion label prevalence across Lemotif and Stories. The Stories test set is less positive and more affectively mixed, indicating a distribution shift between training and external evaluation data.}
+    \label{fig:lemotif-stories-distribution-shift}
+\end{figure}
+
+% Appendix links to cite in prose:
+% Appendix A, Figures A1-A5: word count, topic prevalence, topic-emotion heatmap,
+% emotion co-occurrence, and grouped emotion prevalence.
+
+\subsection{In-Domain Emotion Classification on Lemotif}
+\label{subs:in-domain-emotion-classification}
+
+\begin{itemize}
+    \item Introduce the fine-tuned BERT model as the primary in-domain baseline. BERT is a transformer language model that can be fine-tuned for downstream classification with limited task-specific architecture changes \parencite{vaswani2017attention,devlin2019bert}.
+    \item Report the held-out Lemotif test size: 221 reflections.
+    \item Report headline emotion metrics: micro-$F_1 = .502$, macro-$F_1 = .319$, exact subset accuracy $= .009$, and hamming loss $= .177$.
+    \item Report derived sentiment metrics: accuracy $= .914$ and macro-$F_1 = .652$.
+    \item Interpret micro-$F_1$ and macro-$F_1$ separately: micro-$F_1$ captures average label-level decisions across all labels, while macro-$F_1$ exposes poor performance on sparse labels.
+    \item Explain that exact subset accuracy is low because a multi-label prediction is counted as exactly correct only if the full predicted emotion set matches the gold set.
+    \item Discuss strongest labels: Happy ($F_1 = .766$, $n = 120$), Frustrated ($F_1 = .750$, $n = 28$), and Satisfied ($F_1 = .607$, $n = 86$).
+    \item Discuss weakest nonzero-support labels: Afraid ($F_1 = .000$, $n = 1$), Jealous ($F_1 = .000$, $n = 1$), and Disgusted ($F_1 = .091$, $n = 2$).
+    \item Conclude that the model supports in-domain affect summarization, especially sentiment-level summarization, but not deployment-ready exact emotion-set prediction.
+\end{itemize}
+
+\begin{table}[htbp]
+    \centering
+    \caption{In-domain Lemotif test performance for the main BERT emotion classifier.}
+    \label{tab:lemotif-bert-main}
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        Model & Micro-$F_1$ & Macro-$F_1$ & Subset acc. & Hamming loss & Sent. acc. & Sent. macro-$F_1$ \\
+        \midrule
+        BERT baseline & .502 & .319 & .009 & .177 & .914 & .652 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig03_bert_validation_test_metrics.png}
+    \caption{Validation and held-out test metrics for the in-domain BERT emotion classifier.}
+    \label{fig:bert-validation-test-metrics}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig04_bert_per_emotion_f1.png}
+    \caption{Per-emotion $F_1$ scores on the Lemotif held-out test set. Frequent labels such as Happy and Satisfied are detected more reliably than sparse labels such as Afraid and Jealous.}
+    \label{fig:bert-per-emotion-f1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.82\textwidth]{figures/results/main_text/fig05_sentiment_confusion_matrix.png}
+    \caption{Confusion matrix for derived sentiment on the Lemotif held-out test set. Derived sentiment is substantially more reliable than exact multi-label emotion prediction.}
+    \label{fig:sentiment-confusion-matrix}
+\end{figure}
+
+\subsection{Model Variants and Inference Tradeoffs}
+\label{subs:model-variants-inference-tradeoffs}
+
+\begin{itemize}
+    \item Present Optuna as a hyperparameter-tuned model variant, not the sole main model. Optuna increases emotion micro-$F_1$ to .566 and improves hamming loss to .127, but macro-$F_1$ remains low at .299.
+    \item Present fixed inference as a threshold/cardinality adjustment, not a retrained model. It uses the unchanged fine-tuned BERT weights, threshold .59, and a minimum one-label fallback.
+    \item Explain the practical tradeoff: fixed inference reduces overprediction and increases derived sentiment accuracy from .914 to .941, but emotion micro-$F_1$ decreases from .502 to .445.
+    \item Report the key density change: average predicted labels decrease from 4.330 to 2.127; rows with zero predicted emotions decrease from 9 to 0; rows with at least two extra predicted emotions decrease from 153 to 27.
+    \item Interpret fixed inference as useful for readable affect summaries, not as the strongest fine-grained emotion classifier.
+    \item Mention that Optuna was implemented with a hyperparameter optimization framework designed for flexible search and pruning \parencite{akiba2019optuna}.
+\end{itemize}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comparison of BERT model variants on the Lemotif held-out test set.}
+    \label{tab:bert-variants}
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        Model & Micro-$F_1$ & Macro-$F_1$ & Subset acc. & Hamming loss & Sent. acc. & Avg. labels \\
+        \midrule
+        BERT baseline & .502 & .319 & .009 & .177 & .914 & 4.330 \\
+        BERT Optuna & .566 & .299 & .072 & .127 & .923 & 3.172 \\
+        BERT fixed inference & .445 & .258 & .109 & .130 & .941 & 2.127 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig06_fixed_inference_cardinality.png}
+    \caption{Prediction-cardinality comparison for true labels, baseline BERT predictions, and fixed-inference BERT predictions. The adjusted inference setting reduces label overestimation but lowers fine-grained emotion $F_1$.}
+    \label{fig:fixed-inference-cardinality}
+\end{figure}
+
+% Appendix links to cite in prose:
+% Appendix B: fixed-inference overall metrics and bootstrap confidence intervals.
+% Appendix C: threshold sensitivity and calibration diagnostics.
+
+\subsection{Error Analysis and Interpretability}
+\label{subs:error-analysis-interpretability}
+
+\begin{itemize}
+    \item Use this section to satisfy the rubric requirement for error-pattern analysis.
+    \item Start with the core error pattern: the model performs better on frequent and affectively clear labels than rare or ambiguous labels.
+    \item Discuss rare labels as a data limitation as well as a model limitation. Afraid and Jealous each have one held-out example, so stable label-specific evaluation is not possible for those emotions.
+    \item Discuss multi-label overlap. Reflections can contain blended emotions, so errors often involve missing one emotion while predicting a semantically adjacent or co-occurring label.
+    \item Discuss derived sentiment errors. Broad valence is easier than exact emotion identity, but neutral remains weaker because neutral reflections may contain low-intensity affect or mixed signals.
+    \item Describe LIME as a local interpretability method that explains individual predictions by fitting interpretable surrogate models around them \parencite{ribeiro2016why}. Do not present LIME as global causal explanation.
+    \item Describe feature-ablation outputs as lightweight diagnostics rather than definitive feature importance. The available feature diagnostics use scikit-learn-style modeling tools \parencite{pedregosa2011scikit}.
+    \item Use Appendix C for rare-label errors, multilabel error-flow heatmaps, threshold calibration, feature-ablation diagnostics, and LIME panels.
+\end{itemize}
+
+Suggested synthesis sentence to convert into prose:
+\begin{quote}
+The interpretability analyses therefore support a conservative reading of the classifier: BERT learned broad valence and common emotion categories, but rare-label performance and blended-affect errors limit its suitability for exact emotion-set prediction.
+\end{quote}
+
+\subsection{External Validation on Stories}
+\label{subs:external-validation-stories}
+
+\begin{itemize}
+    \item Open by saying that Stories is the key out-of-domain, human-labeled test of the Lemotif-trained emotion model.
+    \item Report the Stories test size: 114 reflections.
+    \item Report trained BERT emotion performance on Stories: micro-$F_1 = .347$, macro-$F_1 = .246$, exact subset accuracy $= .018$, and hamming loss $= .167$.
+    \item Report trained BERT derived sentiment performance on Stories: accuracy $= .544$ and macro-$F_1 = .490$.
+    \item Compare trained and untrained BERT: emotion micro-$F_1$ .347 vs. .254; emotion macro-$F_1$ .246 vs. .038; sentiment accuracy .544 vs. .140.
+    \item Interpret this comparison as evidence that Lemotif supervision matters, even though generalization remains limited.
+    \item Report Gemma as a separate sentiment-only Stories comparison: sentiment accuracy $= .798$, macro-$F_1 = .674$, and average latency $= 20.50$ seconds per example.
+    \item Clarify that the Gemma Stories comparison evaluates coarse sentiment, not the full 18-label Lemotif emotion taxonomy. Gemma models are open-weight language models based on Gemini-family research \parencite{gemmateam2024gemma}.
+    \item Interpret the overall pattern as domain shift: Stories differs from Lemotif in length, context, tone, source population, and sentiment distribution.
+\end{itemize}
+
+\begin{table}[htbp]
+    \centering
+    \caption{External Stories test performance.}
+    \label{tab:stories-external}
+    \begin{tabular}{lrrrr}
+        \toprule
+        Model/task & Emotion micro-$F_1$ & Emotion macro-$F_1$ & Sent. acc. & Sent. macro-$F_1$ \\
+        \midrule
+        Trained BERT emotion model & .347 & .246 & .544 & .490 \\
+        Untrained BERT control & .254 & .038 & .140 & .097 \\
+        Gemma sentiment only & -- & -- & .798 & .674 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig07_stories_external_model_drop.png}
+    \caption{Performance comparison between the in-domain Lemotif held-out test and the external Stories test. The drop in performance indicates substantial domain shift.}
+    \label{fig:stories-external-model-drop}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig08_stories_per_emotion_f1.png}
+    \caption{Per-emotion $F_1$ scores for the external Stories evaluation. The model generalizes better for frequent or affectively clear categories than for sparse or ambiguous labels.}
+    \label{fig:stories-per-emotion-f1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig09_stories_sentiment_model_comparison.png}
+    \caption{Sentiment comparison on Stories for trained BERT, untrained BERT, and Gemma. Gemma is evaluated as a sentiment-only model and should not be interpreted as an 18-label emotion classifier in this comparison.}
+    \label{fig:stories-sentiment-model-comparison}
+\end{figure}
+
+\subsection{WordPress Public-Journal Descriptive Analysis}
+\label{subs:wordpress-public-journal-descriptive-analysis}
+
+\begin{itemize}
+    \item Start with the caveat: WordPress posts do not have human Lemotif labels, so this section cannot evaluate accuracy, $F_1$, or true model bias.
+    \item State that the section analyzes model outputs descriptively to check whether inferred labels are plausible and whether the model simply reproduces the positive Lemotif training distribution.
+    \item Report the WordPress scope: 72 requested sites, 72 successful sites, 10,671 analyzed reflections, 365-day window, and 365-reflection cap per site.
+    \item Report the top inferred theme: God (11.0\%).
+    \item Report the top inferred emotion: Anxious (48.9\%).
+    \item State that public-journal predictions are not overwhelmingly positive; the strongest inferred emotions include Anxious, Frustrated, Surprised, Sad, Angry, Confused, and Happy.
+    \item Use the theme-emotion heatmap to explain that Health, Sleep, and Work are especially associated with anxious/frustrated outputs, while God and Food show relatively more positive activation.
+    \item Interpret possible skews cautiously: crawler/tag selection, public self-presentation, domain shift, model transfer bias, and higher affect density in negative entries.
+    \item End with the RQ2 answer: WordPress inference does not formally validate the model, but it descriptively suggests that the model does not simply copy Lemotif's positive-class dominance.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/main_text/fig10_wordpress_theme_emotion_heatmap.png}
+    \caption{Inferred theme-emotion conditional prevalence in the public WordPress journal corpus. Because the corpus is not gold-labeled, this figure is interpreted descriptively rather than as model evaluation.}
+    \label{fig:wordpress-theme-emotion-heatmap}
+\end{figure}
+
+% Appendix links to cite in prose:
+% Appendix D: WordPress emotion prevalence, correlation matrix, and co-occurrence network.
+
+\subsection{Results Summary by Research Question}
+\label{subs:results-summary-rq}
+
+\begin{itemize}
+    \item RQ1, in-domain: BERT learned the Lemotif label space moderately well at the multi-label level and strongly at the derived sentiment level.
+    \item RQ1, external Stories: performance dropped substantially, indicating that Lemotif-trained emotion classification does not yet generalize robustly to Stories reflections.
+    \item RQ1, model comparison: Optuna improved micro-$F_1$, fixed inference improved label-density readability and sentiment accuracy, and Gemma improved Stories sentiment but was not a complete replacement for emotion taxonomy classification.
+    \item RQ2, WordPress: the descriptive WordPress analysis suggests non-collapse into positive predictions, but no formal validation or bias metric is possible without gold labels.
+    \item Bridge to Discussion: sentiment-level summarization is the stronger near-term use case, while exact multi-label emotion prediction requires more Stories-specific annotations and stronger rare-label handling.
+\end{itemize}
+
+Suggested closing paragraph to convert into final prose:
+\begin{quote}
+Overall, the results support a cautious interpretation of automatic affect analysis for reflective writing. The Lemotif-trained BERT model captured broad affective patterns and performed especially well when fine-grained emotions were collapsed into derived sentiment. However, the external Stories evaluation showed that exact Lemotif-style emotion classification remained sensitive to domain shift, label sparsity, and multi-label ambiguity. The WordPress analysis extended the pipeline to a larger public-journal setting, but only as descriptive evidence because the corpus was not human-labeled.
+\end{quote}

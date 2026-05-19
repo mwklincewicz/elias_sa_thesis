@@ -1,0 +1,16 @@
+.venv/
+.hf-cache/
+.pytest-tmp/
+.pytest_cache/
+pytest-cache-files-*/
+__pycache__/
+*.pyc
+.env
+
+# Generated public text tables and model artifacts can be regenerated locally.
+output/selected_site_analysis/public_reflection_predictions.csv
+output/selected_site_analysis/public_reflection_predictions.json
+output/selected_site_analysis/thesis_input_tables/public_reflection_input_table.csv
+output/bert_theme_model/model/
+output/bert_theme_model/*.safetensors
+output_smoke/
