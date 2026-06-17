@@ -1,4 +1,19 @@
-# Lemotif Cleaning + EDA Pipeline
+# Lemotif Thesis Code Repository Deliverable
+
+This repository is the public Code Repository Deliverable for Elias Eichler's thesis project on multi-label emotion classification and derived sentiment analysis for reflective prediagnostic mental-health text.
+
+Start here for review:
+
+- Finalized Methodology Overview: [`docs/METHODOLOGY_OVERVIEW.md`](docs/METHODOLOGY_OVERVIEW.md)
+- Data access and restricted-data notes: [`data/README.md`](data/README.md)
+- Clean no-data repository checks: `make check`
+- Full Lemotif cleaning and EDA rebuild after placing the approved dataset: `python src/run_pipeline.py`
+
+The public repository intentionally excludes restricted Stories data, raw local workbooks, generated model checkpoints, and full scraped public-reflection text tables. The MO explains which parts are publicly reproducible from code and which require approved data/model access.
+
+Submission note: after final review, mark the submission commit with a `final` tag and push it with `git push origin final`.
+
+## Lemotif Cleaning + EDA Pipeline
 
 This project is now organized around one clear thesis workflow:
 
@@ -61,6 +76,22 @@ lemotif_eda_vscode/
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+Run the lightweight Code Repository Deliverable checks from a clean checkout:
+
+```bash
+make check
+```
+
+These checks compile the public code, run standard-library repository contract tests, and verify that the CRD documentation links the methodology, data access notes, and reproducibility commands. They do not require restricted datasets, model downloads, or internet access.
+
+If `make` is not available, run the same checks directly:
+
+```bash
+python -m compileall -q src thesis_findings_vscode/wordpress_findings_codebase
+python -m unittest discover -s tests -p "test_*.py"
+python scripts/check_crd_docs.py
 ```
 
 ## Public Code-Only Repository
